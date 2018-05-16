@@ -13,6 +13,11 @@ const linkSchema = new Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  users: {
+    type: Array,
+    required: true,
+    default: []
   }
 });
 

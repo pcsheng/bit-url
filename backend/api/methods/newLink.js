@@ -10,7 +10,7 @@ const newLink = {newLink: (req, res) => {
       if (error && error.code === 11000) {
         Link.findOne({url: url})
           .then(foundLink => {
-            res.json(foundLink);
+            res.send(foundLink.id);
           })
           .catch(error2 => {
             console.log(error2);
@@ -19,7 +19,7 @@ const newLink = {newLink: (req, res) => {
         console.log(error);
         res.json(error);
       } else {
-        res.json(savedLink);
+        res.send(savedLink.id);
       }
     });
     // .then(savedLink => {
