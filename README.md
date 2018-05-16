@@ -1,5 +1,6 @@
 # bit-url
 
-1. cd backend ==> npm install ==> node server.js
-2. cd frontend ==> npm install ==> npm start
-3. connect to localhost:3000
+1. start a mongo server
+2. cd backend ==> npm install ==> node server.js
+3. cd frontend ==> npm install ==> npm start
+4. connect to localhost:3000
