@@ -2,11 +2,11 @@ import React from 'react';
 
 import '../css/OutputLink.css';
 
-const OutputLink = ({ id }) => {
+const OutputLink = ({ id, copyClipboard }) => {
   return (
     <div className="flex-contain valign-wrapper" >
-      <p>{"localhost:3000/" + id}</p>
-      <button class="btn waves-effect waves-light"><i class="material-icons">content_copy</i></button>
+      <p id="copy-target">{"localhost:3000/to/" + id}</p>
+      <button className="btn waves-effect waves-light" onClick={copyClipboard} ><i className="material-icons">content_copy</i></button>
     </div>
   )
 }

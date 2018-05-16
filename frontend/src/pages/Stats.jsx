@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import LinkCard from '../components/LinkCard';
+import StatsCard from '../components/StatsCard';
 
 class Home extends Component {
 
@@ -9,7 +9,9 @@ class Home extends Component {
     super(props);
     this.state = {
       link: "",
-      id: ""
+      url: "",
+      hits: 0,
+      users: []
     }
   }
 
@@ -21,10 +23,17 @@ class Home extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('/link', {url: this.state.link})
+
+    const index = this.state.link.lastIndexOf("/"),
+          id = this.state.link.substr(index + 1);
+
+    axios.get('/stats', {params: {id: id}})
       .then(response => {
+        const { url, hits, users } = response.data;
         this.setState({
-          id: response.data
+          url: url,
+          hits: hits,
+          users: users
         });
       })
       .catch(error => {
@@ -32,17 +41,11 @@ class Home extends Component {
       });
   }
 
-  copyClipboard = () => {
-    alert("this currently does not work, getting an error on select()");
-    // document.getElementById("copy-target").select();
-    // document.execCommand("copy");
-  }
-
   render() {
-    const { link, id } = this.state;
+    const { link, url, hits, users } = this.state;
     return (
       <div className="row">
-        <LinkCard link={link} id={id} handleChange={this.handleChange} handleSubmit={this.handleSubmit} copyClipboard={this.copyClipboard} />
+        <StatsCard link={link} url={url} hits={hits} users={users} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
       </div>
     )
   }
